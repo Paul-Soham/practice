@@ -1,0 +1,8 @@
+.row.registration-form {
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.row.registration-form .card {
+    width: 800px;
+}

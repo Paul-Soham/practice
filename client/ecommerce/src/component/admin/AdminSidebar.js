@@ -6,7 +6,7 @@ const AdminSidebar = () => {
         <>
             <aside className="menu-sidebar d-none d-lg-block">
                 <div className="logo">
-                    <a href="#">
+                    <a>
                         <img src="assets/images/icon/logo.png" alt="Cool Admin" />
                     </a>
                 </div>

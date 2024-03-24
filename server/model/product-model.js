@@ -39,10 +39,10 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        thumbnailImage: {
-            type: String,
-            required: true,
-        },
+        // thumbnailImage: {
+        //     type: String,
+        //     required: true,
+        // },
         productImages: {
             type: [String], 
             default: [],

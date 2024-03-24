@@ -4,6 +4,7 @@ import AdminLogin from './AdminLogin'
 import AdminHome from './AdminHome'
 import AdminUsers from './AdminUsers'
 import AdminContacts from './AdminContacts'
+import AdminProduct from './AdminProduct'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 const AdminRoute = () => {
@@ -18,6 +19,7 @@ const AdminRoute = () => {
                     <Route path='/user' element={<AdminUsers />}></Route>
                     <Route path='/dashboard' element={<AdminHome />}></Route>
                     <Route path='/contact' element={<AdminContacts />}></Route>
+                    <Route path='/product' element={<AdminProduct />}></Route>
                 </Routes>
             </BrowserRouter>
 

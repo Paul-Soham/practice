@@ -6,9 +6,15 @@ const AdminSidebar = () => {
         <>
             <aside className="menu-sidebar d-none d-lg-block">
                 <div className="logo">
+<<<<<<< HEAD
                     <a>
                         <img src="assets/images/icon/logo.png" alt="Cool Admin" />
                     </a>
+=======
+
+                    <img src="assets/images/icon/logo.png" alt="Cool Admin" />
+
+>>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
                 </div>
                 <div className="menu-sidebar__content js-scrollbar1">
                     <nav className="navbar-sidebar">
@@ -23,6 +29,19 @@ const AdminSidebar = () => {
                                     <i className="fas fa-user"></i>Users
                                 </Link>
                             </li>
+<<<<<<< HEAD
+=======
+                            <li className="active has-sub">
+                                <Link to="/contact" className="js-arrow">
+                                    <i className="fas fa-address-book"></i>Contacts
+                                </Link>
+                            </li>
+                            <li className="active has-sub">
+                                <Link to="/product" className="js-arrow">
+                                    <i class="fas fa-shopping-bag"></i>Products
+                                </Link>
+                            </li>
+>>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
                         </ul>
                     </nav>
                 </div>

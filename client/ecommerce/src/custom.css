@@ -1,0 +1,21 @@
+.row.registration-form {
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.row.registration-form .card {
+    width: 800px;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.edit-modal {
+    max-width: 1000px;
+}

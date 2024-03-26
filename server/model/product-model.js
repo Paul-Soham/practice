@@ -39,6 +39,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+<<<<<<< HEAD
         thumbnailImage: {
             type: String,
             required: true,
@@ -53,6 +54,17 @@ const productSchema = new mongoose.Schema(
         //     ref: 'User',
         //     required: true,
         // },
+=======
+        // thumbnailImage: {
+        //     type: String,
+        //     required: true,
+        // },
+        productImages: {
+            type: [String], 
+            default: [],
+        },
+
+>>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
     },
     { timestamps: true }
 );

@@ -1,9 +1,5 @@
 import React from 'react'
-<<<<<<< HEAD
-import AdminHeader from './AdminHeader'
-=======
 import AdminHeader from './AdminHeader';
->>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
 import AdminSidebar from './AdminSidebar';
 import AdminSearch from './AdminSearch';
 

@@ -5,34 +5,6 @@ import AdminSearch from "./AdminSearch";
 
 const AdminUsers = () => {
     const [users, setUsers] = useState([]);
-<<<<<<< HEAD
-
-    useEffect(() => {
-        // Fetch data from the API
-        fetch("http://localhost:5000/api/users")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                setUsers(data);
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-    }, []);
-
-    const handleEdit = (userId) => {
-        // Implement the logic for editing a user
-        console.log(`Edit user with ID: ${userId}`);
-    };
-
-    const handleDelete = (userId) => {
-        // Implement the logic for deleting a user
-        console.log(`Delete user with ID: ${userId}`);
-=======
     const [deleteUserId, setDeleteUserId] = useState(null);
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [editUserData, setEditUserData] = useState({ username: "", email: "", phone: "" });
@@ -132,7 +104,6 @@ const AdminUsers = () => {
             titile:'',
             desc:''
         })
->>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
     };
 
     return (
@@ -151,32 +122,14 @@ const AdminUsers = () => {
                                         <table className="table table-borderless table-striped table-earning">
                                             <thead>
                                                 <tr>
-<<<<<<< HEAD
-                                                    <th>Username</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th className="text-right">Role</th>
-=======
                                                     <th className="text-center">ID</th>
                                                     <th>Username</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
->>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
                                                     <th className="text-right">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-<<<<<<< HEAD
-                                                {users.map(user => (
-                                                    <tr key={user.id}>
-                                                        <td>{user.username}</td>
-                                                        <td>{user.email}</td>
-                                                        <td>{user.phone}</td>
-                                                        <td className="text-right">{user.role}</td>
-                                                        <td className="text-right">
-                                                            <button className="btn btn-primary" onClick={() => handleEdit(user.id)}>Edit</button>
-                                                            <button className="btn btn-danger" onClick={() => handleDelete(user.id)}>Delete</button>
-=======
                                                 {users.map((user) => (
                                                     <tr>
                                                         <td className="text-left">{user._id}</td>
@@ -188,7 +141,6 @@ const AdminUsers = () => {
                                                                 <button className="btn btn-primary" onClick={() => handleEdit(user)}><i className="fas fa-edit"></i> Edit</button>
                                                                 <button className="btn btn-danger" onClick={() => handleDelete(user._id)}><i className="fas fa-trash"></i> Delete</button>
                                                             </div>
->>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -201,8 +153,6 @@ const AdminUsers = () => {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
-=======
 
             {/* Modal for User Deletion */}
             {alert.open && (
@@ -304,7 +254,6 @@ const AdminUsers = () => {
                     </div>
                 </div>
             )}
->>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45
         </>
     );
 };

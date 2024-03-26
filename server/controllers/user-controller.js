@@ -16,10 +16,5 @@ const RegisteredUser = async (req, res) => {
         });
     }
 };
-<<<<<<< HEAD
-
-export default RegisteredUser;
-=======
 export default RegisteredUser;
 
->>>>>>> 62c3ac1835686638464660a8905b7f5ccb52bc45

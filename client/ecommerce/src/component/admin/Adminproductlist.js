@@ -54,7 +54,11 @@ const AdminProductlist = () => {
                                                     <td className="text-center">
                                                         {product.productImages.length > 0 && (
                                                             <img src={product.productImages[0]} alt="Product" style={{ width: '100px' }} />
+
                                                         )}
+                                                        {/* {product.productImages.length > 1 && (
+                                                            <img src={product.productImages[1]} alt="Product" style={{ width: '100px' }} />
+                                                        )} */}
                                                     </td>
                                                     <td>{product.title}</td>
                                                     <td>{product.description}</td>

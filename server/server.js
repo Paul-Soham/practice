@@ -5,6 +5,11 @@ import cors from "cors";
 import connectDb from "./database/dbcon.js";
 import router from "./router/auth-router.js";
 import multer from "multer";
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const port = 5000;
 const app = Express();
@@ -17,6 +22,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: false }));
+app.use('/database/uploads', Express.static(path.join(__dirname, '/database/uploads')));
 
 // Set up multer for handling file uploads
 const storage = multer.diskStorage({

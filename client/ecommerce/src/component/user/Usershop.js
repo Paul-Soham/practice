@@ -1,8 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Userheader from './Userheader';
 import Userfooter from './Userfooter';
 
-function Usershop() {
+const Usershop = () => {
+  const [products, setProducts] = useState([]);
+  const [visibleProducts, setVisibleProducts] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [allProductsLoaded, setAllProductsLoaded] = useState(false);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/allproducts");
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setProducts(data.products);
+      setVisibleProducts(data.products.slice(startIndex, startIndex + 8));
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const loadMoreProducts = () => {
+    const nextStartIndex = startIndex + 8;
+    if (nextStartIndex >= (products?.length || 0)) { // Add null check for products and fallback to 0 if undefined
+      setAllProductsLoaded(true);
+    } else {
+      setVisibleProducts([
+        ...visibleProducts,
+        ...products.slice(nextStartIndex, nextStartIndex + 8)
+      ]);
+      setStartIndex(nextStartIndex);
+    }
+  };
+
   return (
     <>
       <Userheader />
@@ -13,220 +51,46 @@ function Usershop() {
             <h2>
               Latest Products
             </h2>
+            <p>Total Products: {products?.length || 0}</p> {/* Add null check for products and fallback to 0 if undefined */}
           </div>
           <div className="row">
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p1.png" alt="" />
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              visibleProducts.map(product => (
+                <div className="col-sm-6 col-md-4 col-lg-3" key={product.id}>
+                  <div className="box">
+                    <a>
+                      <div className="img-box">
+                        <img src={product.image} alt={product.title} />
+                      </div>
+                      <div className="detail-box">
+                        <h6>{product.title}</h6>
+                        <h6>Price <span>${product.price}</span></h6>
+                      </div>
+                      <div className="new">
+                        <span>New</span>
+                      </div>
+                    </a>
                   </div>
-                  <div className="detail-box">
-                    <h6>
-                      Necklace
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $200
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p2.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Necklace
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $300
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p3.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Necklace
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $110
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p4.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Ring
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $45
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p5.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Ring
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $95
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p6.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Earrings
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $70
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p7.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Earrings
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $400
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-4 col-lg-3">
-              <div className="box">
-                <a >
-                  <div className="img-box">
-                    <img src="user-assets/images/p8.png" alt="" />
-                  </div>
-                  <div className="detail-box">
-                    <h6>
-                      Necklace
-                    </h6>
-                    <h6>
-                      Price
-                      <span>
-                        $450
-                      </span>
-                    </h6>
-                  </div>
-                  <div className="new">
-                    <span>
-                      New
-                    </span>
-                  </div>
-                </a>
-              </div>
-            </div>
+                </div>
+              ))
+            )}
           </div>
-          <div className="btn-box">
-            <a >
-              View All Products
-            </a>
-          </div>
+          {!allProductsLoaded && (
+            <div className="btn-box">
+              <button onClick={loadMoreProducts}>View More Products</button>
+            </div>
+          )}
+          {allProductsLoaded && (
+            <p>No more products</p>
+          )}
         </div>
       </section>
       {/* <!-- end shop section --> */}
       <Userfooter />
     </>
-  )
-}
+  );
+};
 
-export default Usershop
+export default Usershop;

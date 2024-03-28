@@ -25,7 +25,6 @@ router.post("/products", upload.array("productImages", 5), createProduct);
 router.get("/users", RegisteredUser);
 router.put("/update", updateControllers);
 router.delete("/delete", deleteControllers);
-router.post("/products", upload.array("productImages", 5), createProduct);
 
 router.get("/users", RegisteredUser);
 router.get("/user/:id", GetUserById);

@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import Userfooter from './Userfooter'
 
-function Userhome() {
+const Userhome = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       {/* <!-- header section strats --> */}
@@ -15,18 +22,18 @@ function Userhome() {
             </a>
             <div className="" id="">
 
-              <div className="custom_menu-btn">
-                <button onclick="openNav()">
+              <div className={`custom_menu-btn ${isOpen ? 'menu_btn-style' : ''}`}>
+                <button onClick={toggleMenu}>
                   <span className="s-1"> </span>
                   <span className="s-2"> </span>
                   <span className="s-3"> </span>
                 </button>
-                <div id="myNav" className="overlay">
+                <div id="myNav" className={`overlay ${isOpen ? 'menu_width' : ''}`}>
                   <div className="overlay-content">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="shop.html">Shop</a>
-                    <a href="blog.html">Blog</a>
+                  <Link to="/">Home</Link>
+                  <Link to="/about">About</Link>
+                  <Link to="/shop">Shop</Link>
+                  <Link to="/blog">Blog</Link>
                   </div>
                 </div>
               </div>
@@ -55,7 +62,7 @@ function Userhome() {
                 looking at its layout. The point of using Lorem
               </p>
               <div>
-                <a  className="slider-link">
+                <a className="slider-link">
                   Shop Now
                 </a>
               </div>

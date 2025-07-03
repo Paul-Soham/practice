@@ -131,7 +131,7 @@ const AdminRegistration = () => {
                 <button type="submit" className="btn btn-success btn-sm">
                   Sign Up
                 </button>
-                <span className="ml-2">Already have an account? <Link to="/admin/login">Sign In</Link></span>
+                <span className="ml-2">Already have an account? <Link to="/login">Sign In</Link></span>
               </div>
             </form>
           </div>

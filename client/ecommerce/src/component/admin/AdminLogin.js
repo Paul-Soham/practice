@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,13 +15,13 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
 
     try {
       const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Add any additional headers if needed
         },
         body: JSON.stringify(formData),
       });
@@ -27,16 +29,18 @@ const AdminLogin = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Login successful:', data);
+        sessionStorage.setItem('userData', JSON.stringify(data.token));
+        navigate('/dashboard');
       } else {
         console.error('Login failed:', response.status);
-        // Optionally, you can handle different HTTP status codes here
-        // For example, display a specific message for 401 (Unauthorized)
+        setError('Invalid Credential');
         if (response.status === 401) {
           console.log('Unauthorized access. Please check your credentials.');
         }
       }
     } catch (error) {
       console.error('Error during login:', error);
+      setError('Invalid Credential');
     }
   };
 
@@ -82,6 +86,9 @@ const AdminLogin = () => {
                   <i className="fa fa-dot-circle-o"></i> Sign In
                 </button>
                 <span>Create a new account? <Link to="/admin/" className="btn btn-success btn-sm2">Sign Up</Link></span>
+              </div>
+              <div className="alertMessage">
+                <p>{error}</p>
               </div>
             </form>
           </div>

@@ -17,7 +17,7 @@ const Uploadedproduct = async (req, res) => {
         res.status(200).json({
             success: true,
             message: "All products fetched successfully",
-            users: productsWithImageUrl,
+            products: productsWithImageUrl,
         });
     }
     catch (error) {

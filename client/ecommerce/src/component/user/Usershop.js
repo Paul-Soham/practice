@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Userheader from './Userheader';
 import Userfooter from './Userfooter';
 
@@ -8,6 +9,7 @@ const Usershop = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [allProductsLoaded, setAllProductsLoaded] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProducts();
@@ -20,13 +22,13 @@ const Usershop = () => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
 
-      if (Array.isArray(data.users)) {
-        setProducts(data.users);
-        setVisibleProducts(data.users.slice(startIndex, startIndex + 8));
+      if (Array.isArray(data.products)) {
+        setProducts(data.products);
+        setVisibleProducts(data.products.slice(startIndex, startIndex + 8));
       } else {
-        throw new Error("Invalid data format: 'users' is not an array or is undefined.");
+        throw new Error("Invalid data format: 'products' is not an array or is undefined.");
       }
 
       setIsLoading(false);
@@ -50,9 +52,8 @@ const Usershop = () => {
     }
   };
 
-  const handleProductClick = (productTitle) => {
-    const url = `http://localhost:3000/product/${productTitle.toLowerCase().replace(/\s+/g, '-')}`;
-    alert(url);
+  const handleProductClick = (productId) => {
+    navigate(`/product?id=${productId}`);
   };
 
   return (
@@ -69,7 +70,7 @@ const Usershop = () => {
               <p>Loading...</p>
             ) : (
               visibleProducts.map(product => (
-                <div className="col-sm-6 col-md-4 col-lg-3" key={product.id} onClick={() => handleProductClick(product.title)}>
+                <div className="col-sm-6 col-md-4 col-lg-3" key={product._id} onClick={() => handleProductClick(product._id)}>
                   <div className="box">
                     <div className="img-box">
                       {product.productImages.length > 0 && (

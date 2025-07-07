@@ -18,7 +18,7 @@ const AdminProductlist = () => {
                 throw new Error('Failed to fetch products');
             }
             const data = await response.json();
-            setProducts(data.users);
+            setProducts(data.products);
         } catch (error) {
             console.error('Error fetching products:', error);
         }

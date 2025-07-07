@@ -17,12 +17,11 @@ const Usershop = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/allproducts");
+      const response = await fetch('http://localhost:5000/api/allproducts');
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error('Failed to fetch products');
       }
       const data = await response.json();
-      //console.log(data);
 
       if (Array.isArray(data.products)) {
         setProducts(data.products);
@@ -32,16 +31,14 @@ const Usershop = () => {
       }
 
       setIsLoading(false);
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching products:", error);
-      setIsLoading(false);
     }
   };
 
   const loadMoreProducts = () => {
     const nextStartIndex = startIndex + 8;
-    if (nextStartIndex >= products.length) {
+    if (nextStartIndex >= (products?.length || 0)) {
       setAllProductsLoaded(true);
     } else {
       setVisibleProducts([
@@ -52,8 +49,24 @@ const Usershop = () => {
     }
   };
 
-  const handleProductClick = (productId) => {
-    navigate(`/product?id=${productId}`);
+  // Helper function to create URL-friendly product name
+  const createUrlFriendlyName = (title) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+      .trim();
+  };
+
+  const handleProductClick = (product) => {
+    const urlFriendlyName = createUrlFriendlyName(product.title);
+    navigate(`/product/${urlFriendlyName}`, {
+      state: {
+        productId: product._id,
+        productData: product
+      }
+    });
   };
 
   return (
@@ -62,46 +75,51 @@ const Usershop = () => {
       <section className="shop_section layout_padding">
         <div className="container">
           <div className="heading_container heading_center">
-            <h2>Latest Products</h2>
-            <p>Total Products: {products.length}</p>
+            <h2>
+              Latest Products
+            </h2>
+            <p>Total Products: {products?.length || 0}</p>
           </div>
+          <p className='text-center p-2'>Total Products: {products?.length || 0}</p>
           <div className="row">
             {isLoading ? (
               <p>Loading...</p>
             ) : (
               visibleProducts.map(product => (
-                <div className="col-sm-6 col-md-4 col-lg-3" key={product._id} onClick={() => handleProductClick(product._id)}>
+                <div className="col-sm-6 col-md-4 col-lg-3" key={product._id} onClick={() => handleProductClick(product)}>
                   <div className="box">
-                    <div className="img-box">
-                      {product.productImages.length > 0 && (
-                        <img src={product.productImages[0]} alt={product.title} />
-                      )}
-                    </div>
-                    <div className="detail-box">
-                      <h6>{product.title}</h6>
-                      <h6>Price <span>${product.price}</span></h6>
-                    </div>
-                    <div className="new">
-                      <span>New</span>
-                    </div>
+                    <a style={{ cursor: 'pointer' }}>
+                      <div className="img-box">
+                        {product.productImages.length > 0 && (
+                          <img src={product.productImages[0]} alt={product.title} style={{ width: '100%', height: 'auto' }} />
+
+                        )}
+                      </div>
+                      <div className="detail-box">
+                        <h6>{product.title}</h6>
+                        <h6>Price <span>${product.price}</span></h6>
+                      </div>
+                      <div className="new">
+                        <span>New</span>
+                      </div>
+                    </a>
                   </div>
                 </div>
-              ))
-            )}
+              )))}
           </div>
-          {!allProductsLoaded && !isLoading && (
-            <div className="btn-box">
-              <button onClick={loadMoreProducts}>View More Products</button>
-            </div>
-          )}
-          {allProductsLoaded && (
-            <p>No more products</p>
-          )}
         </div>
+        {!allProductsLoaded && (
+          <div className="btn-box">
+            <button onClick={loadMoreProducts}>View More Products</button>
+          </div>
+        )}
+        {allProductsLoaded && (
+          <p>No more products</p>
+        )}
       </section>
       <Userfooter />
     </>
-  );
-};
+  )
+}
 
 export default Usershop;

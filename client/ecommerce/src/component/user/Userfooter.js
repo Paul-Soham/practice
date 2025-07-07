@@ -21,7 +21,7 @@ function Userfooter() {
 
                             <div className="social_box">
                                 <a >
-                                    <i className="fas fa-facebook" aria-hidden="true"></i>
+                                    <i className="fa fa-facebook" aria-hidden="true"></i>
                                 </a>
                                 <a >
                                     <i className="fas fa-twitter" aria-hidden="true"></i>

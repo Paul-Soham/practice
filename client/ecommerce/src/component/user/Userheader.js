@@ -9,6 +9,10 @@ const Userheader = () => {
         // alert('Button clicked!'); // Adding an alert on button click
     };
 
+    // Sample counts (can be replaced with actual state or props)
+    const wishlistCount = 3;
+    const cartCount = 6;
+
     return (
         <header className="header_section innerpage_header">
             <div className="container-fluid">
@@ -16,6 +20,22 @@ const Userheader = () => {
                     <a className="navbar-brand" href="/">
                         <span>Healet</span>
                     </a>
+                    <div className="icon-container">
+                        <Link to="/search">
+                            <span role="img" aria-label="Search"><i className="fa fa-search" aria-hidden="true"></i></span>
+                        </Link>
+                        <Link to="/my-account">
+                            <span role="img" aria-label="My Account"><i className="fa fa-user" aria-hidden="true"></i></span>
+                        </Link>
+                        <Link to="/wishlist">
+                            <span role="img" aria-label="Wishlist"><i className="fa fa-heart" aria-hidden="true"></i></span>
+                            {wishlistCount > 0 && <span className="count">{wishlistCount}</span>}
+                        </Link>
+                        <Link to="/cart">
+                            <span role="img" aria-label="Cart"><i className="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                            {cartCount > 0 && <span className="count">{cartCount}</span>}
+                        </Link>
+                    </div>
                     <div>
                         <div className={`custom_menu-btn ${isOpen ? 'menu_btn-style' : ''}`}>
                             <button onClick={toggleMenu}>

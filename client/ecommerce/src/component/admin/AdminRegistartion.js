@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 
-
 const AdminRegistration = () => {
-
   // let loggedIn = false;
-
   // if (loggedIn) {
   //     return <Outlet/>
   // }
   // else{
   //     return <Navigate to={"/admin/login"}/>;
   // }
-
-
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -131,7 +126,7 @@ const AdminRegistration = () => {
                 <button type="submit" className="btn btn-success btn-sm">
                   Sign Up
                 </button>
-                <span className="ml-2">Already have an account? <Link to="/admin/login">Sign In</Link></span>
+                <span className="ml-2">Already have an account? <Link to="/login">Sign In</Link></span>
               </div>
             </form>
           </div>
